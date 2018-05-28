@@ -1,7 +1,7 @@
 // Set up a buildscript dependency on the Kotlin plugin.
 buildscript {
     // Specify a Kotlin version you need.
-    ext.kotlin_version = '1.2.31'
+    ext.kotlin_version = '1.2.41'
     ext.konan_version = '0.7'
 
     repositories {

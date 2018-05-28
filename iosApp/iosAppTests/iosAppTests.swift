@@ -8,7 +8,6 @@
 
 import XCTest
 import Greeting
-@testable import iosApp
 
 class iosAppTests: XCTestCase {
     
