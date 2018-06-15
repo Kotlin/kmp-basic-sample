@@ -12,4 +12,6 @@ dependencies {
 
     // Specify dependency on a common project for Kotlin multiplatform build.
     expectedBy project(':greeting:common')
+
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
