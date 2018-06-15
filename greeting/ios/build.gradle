@@ -9,6 +9,24 @@ konanArtifacts {
         // The multiplatform support is disabled by default.
         enableMultiplatform true
     }
+
+    library('NativeLib') {
+        enableMultiplatform true
+    }
+
+    program('NativeTest') {
+        srcDir 'src/test/kotlin'
+        commonSourceSet 'test'
+        libraries {
+            artifact 'NativeLib'
+        }
+        extraOpts '-tr'
+    }
+}
+
+task test(dependsOn: 'compileKonanNativeTestIos_x64', type: Exec) {
+    def textExecutable = tasks["compileKonanNativeTestIos_x64"].artifactPath
+    commandLine("xcrun", "simctl", "spawn", "iPhone 8", textExecutable)
 }
 
 dependencies {
