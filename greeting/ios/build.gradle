@@ -15,14 +15,16 @@ sourceSets {
     }
 }
 
-task copyFramework() << {
-    def srcFile = tasks['compileDebugIos_x64KotlinNative'].outputFile
-    def targetDir = getProperty("konan.configuration.build.dir")
-    copy {
-        from srcFile.parent
-        into targetDir
-        include 'Greeting.framework/**'
-        include 'Greeting.framework.dSYM'
+task copyFramework() {
+    doLast {
+        def srcFile = tasks['compileDebugIos_x64KotlinNative'].outputFile
+        def targetDir = getProperty("konan.configuration.build.dir")
+        copy {
+            from srcFile.parent
+            into targetDir
+            include 'Greeting.framework/**'
+            include 'Greeting.framework.dSYM'
+        }
     }
 }
 
