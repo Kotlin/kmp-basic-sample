@@ -1,32 +1,38 @@
-apply plugin: 'konan'
+apply plugin: 'kotlin-platform-native'
 
-// Specify targets to build the framework: iOS and iOS simulator
-konan.targets = ['ios_arm64', 'ios_x64']
-
-konanArtifacts {
-    // Declare building into a framework.
-    framework('Greeting') {
-        // The multiplatform support is disabled by default.
-        enableMultiplatform true
-    }
-
-    library('NativeLib') {
-        enableMultiplatform true
-    }
-
-    program('NativeTest') {
-        srcDir 'src/test/kotlin'
-        commonSourceSet 'test'
-        libraries {
-            artifact 'NativeLib'
+sourceSets {
+    main {
+        component {
+            baseName.set("Greeting")
+            target 'ios_arm64', 'ios_x64'
+            outputKinds = [FRAMEWORK]
         }
-        extraOpts '-tr'
+    }
+    test {
+        component {
+            target 'ios_x64'
+        }
     }
 }
 
-task test(dependsOn: 'compileKonanNativeTestIos_x64', type: Exec) {
-    def textExecutable = tasks["compileKonanNativeTestIos_x64"].artifactPath
-    commandLine("xcrun", "simctl", "spawn", "iPhone 8", textExecutable)
+task copyFramework() {
+    doLast {
+        def srcFile = tasks['compileDebugIos_x64KotlinNative'].outputFile
+        def targetDir = getProperty("konan.configuration.build.dir")
+        copy {
+            from srcFile.parent
+            into targetDir
+            include 'Greeting.framework/**'
+            include 'Greeting.framework.dSYM'
+        }
+    }
+}
+
+afterEvaluate { project ->
+    project.task('test', dependsOn: 'compileTestDebugKotlinNative', type: Exec, overwrite: true) {
+        def textExecutable = tasks["compileTestDebugKotlinNative"].outputFile
+        commandLine("xcrun", "simctl", "spawn", "iPhone 8", textExecutable)
+    }
 }
 
 dependencies {
