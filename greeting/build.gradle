@@ -1,8 +1,8 @@
 // Set up a buildscript dependency on the Kotlin plugin.
 buildscript {
     // Specify a Kotlin version you need.
-    ext.kotlin_version = '1.2.41'
-    ext.konan_version = '0.8.1'
+    ext.kotlin_version = '1.2.60'
+    ext.konan_version = '0.8.2'
 
     repositories {
         jcenter()
@@ -21,5 +21,6 @@ buildscript {
 subprojects {
     repositories {
         jcenter()
+        google()
     }
 }
