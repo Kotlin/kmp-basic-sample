@@ -12,7 +12,7 @@ buildscript {
 
     // Specify all the plugins used as dependencies
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-native-gradle-plugin:$konan_version"
     }

@@ -6,7 +6,7 @@ actual class Platform actual constructor() {
     actual val platform: String = "Android"
 }
 
-actual class Product(val user: String) {
+actual class Product(actual val user: String) {
     fun androidSpecificOperation() {
         println("I am ${Build.MODEL} by ${Build.MANUFACTURER}")
     }

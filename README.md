@@ -32,6 +32,3 @@ See [here](androidApp/app/src/test/kotlin/org/konan/multiplatform/GreetingTest.k
    > cd ../greeting/android
    > ../../gradlew test
 ```
-
-  Note that Android build uses hack to provide Android SDK definitions
-to the platform code compiled with Kotlin MPP plugin, see [here](greeting/android/build.gradle).
