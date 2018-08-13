@@ -21,4 +21,5 @@ expect class Platform() {
 
 class Greeting {
     fun greeting(): String = "Hello, ${Platform().platform}"
+    fun greetingCalc(): String = "Hello, ${Calculator.getName("a1")}"
 }
