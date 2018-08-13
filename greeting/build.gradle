@@ -5,15 +5,16 @@ buildscript {
     ext.konan_version = '0.8.2'
 
     repositories {
+        google()
         jcenter()
         maven { url "https://dl.bintray.com/jetbrains/kotlin-native-dependencies" }
     }
 
     // Specify all the plugins used as dependencies
     dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-native-gradle-plugin:$konan_version"
-
     }
 }
 

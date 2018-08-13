@@ -1,4 +1,5 @@
-apply plugin: 'kotlin-platform-jvm'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-platform-android'
 
 // Specify a group and a version of the library to access it in Android Studio.
 // By default the project directory name is used as an artifact name thus the full dependency
@@ -6,17 +7,36 @@ apply plugin: 'kotlin-platform-jvm'
 group = 'org.greeting'
 version = 1.0
 
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
 dependencies {
+    expectedBy project(':greeting:common')
+	
     // Specify Kotlin/JVM stdlib dependency.
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation 'com.android.support:appcompat-v7:27.1.1'
 
-    // TODO: this is an ugly hack, as kotlin-platform-jvm has no Android platform libraries deps!
-    implementation fileTree(dir: 'libs', includes: ['android-27.jar'])
-
-    // Specify dependency on a common project for Kotlin multiplatform build.
-    expectedBy project(':greeting:common')
-
+	testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
