@@ -1,19 +1,20 @@
 // Set up a buildscript dependency on the Kotlin plugin.
 buildscript {
     // Specify a Kotlin version you need.
-    ext.kotlin_version = '1.2.41'
-    ext.konan_version = '0.8.1'
+    ext.kotlin_version = '1.2.60'
+    ext.konan_version = '0.8.2'
 
     repositories {
+        google()
         jcenter()
         maven { url "https://dl.bintray.com/jetbrains/kotlin-native-dependencies" }
     }
 
     // Specify all the plugins used as dependencies
     dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-native-gradle-plugin:$konan_version"
-
     }
 }
 
@@ -21,5 +22,6 @@ buildscript {
 subprojects {
     repositories {
         jcenter()
+        google()
     }
 }

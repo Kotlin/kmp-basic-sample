@@ -15,10 +15,11 @@
  */
 package org.greeting
 
-expect class Platform() {
-    val platform: String
+expect class Product {
+    val user: String
 }
 
-class Greeting {
-    fun greeting(): String = "Hello, ${Platform().platform}"
+expect object Factory {
+    fun create(config: Map<String, String>): Product
+    val platform: String
 }
