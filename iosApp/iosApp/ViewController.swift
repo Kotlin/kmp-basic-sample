@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import Greeting
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let product = GreetingFactory().create(config: ["user": "JetBrains"])
+        label.text = product.description
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    @IBOutlet weak var label: UILabel!
 }
 
