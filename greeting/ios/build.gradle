@@ -4,13 +4,13 @@ sourceSets {
     main {
         component {
             baseName.set("Greeting")
-            target 'ios_arm32', 'ios_arm64', 'ios_x64'
+            targets = ['ios_arm32', 'ios_arm64', 'ios_x64']
             outputKinds = [FRAMEWORK]
         }
     }
     test {
         component {
-            target 'ios_x64'
+            targets = ['ios_x64']
         }
     }
 }
