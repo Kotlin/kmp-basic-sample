@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-platform-android'
 
 android {
     compileSdkVersion 27
@@ -13,12 +13,16 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     packagingOptions {
         exclude 'META-INF/main.kotlin_module'
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
     }
 }
 
@@ -26,5 +30,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'org.greeting:android:1.0'
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
     testImplementation 'junit:junit:4.12'
 }

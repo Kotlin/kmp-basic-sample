@@ -10,7 +10,7 @@ actual class Product(actual val user: String) {
     fun androidSpecificOperation() {
         println("I am ${Build.MODEL} by ${Build.MANUFACTURER}")
     }
-    override fun toString() = "Android product for ${Build.MODEL}"
+    override fun toString() = "Android product of $user for ${Build.MODEL}"
 }
 
 actual object Factory {
@@ -18,4 +18,3 @@ actual object Factory {
             Product(config["user"]!!)
     actual val platform: String = "android"
 }
-
