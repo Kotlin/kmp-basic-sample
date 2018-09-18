@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Greeting
+import greeting
 
 class iosAppTests: XCTestCase {
     

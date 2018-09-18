@@ -1,6 +1,7 @@
+package org.greeting
+
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.greeting.*
 
 open class CalculatorTest {
 

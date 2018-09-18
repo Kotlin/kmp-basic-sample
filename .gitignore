@@ -3,3 +3,4 @@
 build/
 .idea/
 .DS_STORE
+local.properties

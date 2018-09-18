@@ -1,7 +1,7 @@
 package org.greeting
 
-import platform.posix.*
 import kotlinx.cinterop.*
+import platform.posix.*
 
 actual class Platform actual constructor() {
     actual val platform: String = "iOS"
