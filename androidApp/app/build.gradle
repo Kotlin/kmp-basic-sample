@@ -28,6 +28,14 @@ android {
     }
 }
 
+repositories {
+        maven {
+                url "https://dl.bintray.com/kotlin/kotlin-eap"
+            }
+        google()
+}
+
+
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib'
     implementation 'org.greeting:greeting:1.0'
