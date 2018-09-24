@@ -22,10 +22,6 @@ android {
     packagingOptions {
         exclude 'META-INF/main.kotlin_module'
     }
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
-        test.java.srcDirs += 'src/test/kotlin'
-    }
 }
 
 kotlin {
