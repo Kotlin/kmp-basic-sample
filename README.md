@@ -27,9 +27,5 @@ See [here](androidApp/app/src/test/kotlin/org/konan/multiplatform/GreetingTest.k
  To compile application and run tests from the command line
 
 ```
-   > cd androidApp
-   > ../gradlew build
-   > ../gradlew test
-   > cd ../greeting/android
-   > ../../gradlew test
+   > ./gradlew :androidApp:build
 ```
