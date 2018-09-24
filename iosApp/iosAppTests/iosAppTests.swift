@@ -12,7 +12,7 @@ import greeting
 class iosAppTests: XCTestCase {
     
     func testExample() {
-        assert(GreetingGreeting().greeting() == "Hello, iOS")
+        assert(Greeting().greeting() == "Hello, iOS")
     }
     
 }

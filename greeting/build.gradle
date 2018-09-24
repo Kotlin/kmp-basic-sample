@@ -40,7 +40,7 @@ kotlin {
     targets {
         fromPreset(presets.android, 'androidLib')
 
-        // Target should be changed to presets.arm64 if you are running iosApp on the device
+        // Target should be changed to presets.iosArm64 if you are running iosApp on the device
         fromPreset(presets.iosX64, 'ios') {
             compilations.main.outputKinds('FRAMEWORK')
         }
@@ -61,12 +61,15 @@ kotlin {
     }
 }
 
-task copyFramework() {
+task copyFramework {
+    def buildType = project.findProperty("kotlin.build.type") ?: "DEBUG"
+    dependsOn "link${buildType.toLowerCase().capitalize()}FrameworkIos"
+
     doLast {
-        def srcFile = tasks['linkDebugFrameworkIos'].outputFile
-        def targetDir = getProperty("konan.configuration.build.dir")
+        def srcFile = kotlin.targets.ios.compilations.main.getBinary("FRAMEWORK", buildType)
+        def targetDir = getProperty("configuration.build.dir")
         copy {
-            from srcFile.get().parent
+            from srcFile.parent
             into targetDir
             include 'greeting.framework/**'
             include 'greeting.framework.dSYM'
