@@ -1,8 +1,8 @@
 package org.konan.multiplatform
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
 import android.app.Application
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.LinearLayout
 import android.widget.TextView
 import org.greeting.Factory
