@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Greeting
+import greeting
 
 class ViewController: UIViewController {
 

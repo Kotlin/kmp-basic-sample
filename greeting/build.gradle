@@ -1,27 +1,88 @@
-// Set up a buildscript dependency on the Kotlin plugin.
-buildscript {
-    // Specify a Kotlin version you need.
-    ext.kotlin_version = '1.2.60'
-    ext.konan_version = '0.9'
+plugins {
+    id 'com.android.library' version '3.3.0-alpha10'
+    id 'kotlin-multiplatform' version '1.3.0-rc-57'
+    id 'maven-publish'
+}
 
-    repositories {
-        google()
-        jcenter()
-        maven { url "https://dl.bintray.com/jetbrains/kotlin-native-dependencies" }
+group = 'org.greeting'
+version = 1.0
+
+android {
+    compileSdkVersion 27                                              
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName '1.0'
+
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
-    // Specify all the plugins used as dependencies
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-native-gradle-plugin:$konan_version"
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/androidLibMain/kotlin'
+        test.java.srcDirs += 'src/androidLibTest/kotlin'
     }
 }
 
-// Set up compilation dependency repositories for all projects.
-subprojects {
-    repositories {
-        jcenter()
-        google()
+dependencies {
+    // Specify Kotlin/JVM stdlib dependency.
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'org.jetbrains.kotlin:kotlin-test'
+    androidTestImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+kotlin {
+    targets {
+        fromPreset(presets.android, 'androidLib')
+
+        // Target should be changed to presets.arm64 if you are running iosApp on the device
+        fromPreset(presets.iosX64, 'ios') {
+            compilations.main.outputKinds('FRAMEWORK')
+        }
+    }
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
+            }
+        }
+        commonTest {
+            dependencies {
+                implementation 'org.jetbrains.kotlin:kotlin-test-common'
+                implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
+            }
+        }
+    }
+}
+
+
+task copyFramework() {
+    doLast {
+        def srcFile = tasks['linkDebugFrameworkIos'].outputFile
+        def targetDir = getProperty("konan.configuration.build.dir")
+        copy {
+            from srcFile.get().parent
+            into targetDir
+            include 'greeting.framework/**'
+            include 'greeting.framework.dSYM'
+        }
     }
 }
