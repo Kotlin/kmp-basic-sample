@@ -39,9 +39,10 @@ dependencies {
 kotlin {
     targets {
         fromPreset(presets.android, 'androidLib')
+        fromPreset(presets.iosArm64, 'ios')
+        fromPreset(presets.iosX64, 'iosSim')
 
-        // Target should be changed to presets.iosArm64 if you are running iosApp on the device
-        fromPreset(presets.iosX64, 'ios') {
+        configure([ios, iosSim]) {
             compilations.main.outputKinds('FRAMEWORK')
         }
     }
@@ -58,15 +59,18 @@ kotlin {
                 implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
             }
         }
+        iosSimMain.dependsOn iosMain
+        iosSimTest.dependsOn iosTest
     }
 }
 
 task copyFramework {
     def buildType = project.findProperty("kotlin.build.type") ?: "DEBUG"
-    dependsOn "link${buildType.toLowerCase().capitalize()}FrameworkIos"
+    def target = project.findProperty("kotlin.target") ?: "ios"
+    dependsOn "link${buildType.toLowerCase().capitalize()}Framework${target.capitalize()}"
 
     doLast {
-        def srcFile = kotlin.targets.ios.compilations.main.getBinary("FRAMEWORK", buildType)
+        def srcFile = kotlin.targets."$target".compilations.main.getBinary("FRAMEWORK", buildType)
         def targetDir = getProperty("configuration.build.dir")
         copy {
             from srcFile.parent
