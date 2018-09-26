@@ -60,8 +60,6 @@
 		F861D7F5207FA4100085E80D /* iosAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosAppTests.swift; sourceTree = "<group>"; };
 		F861D7F7207FA4100085E80D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F861D805207FA4200085E80D /* greeting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = greeting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F861D807207FA4200085E80D /* greeting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = greeting.h; sourceTree = "<group>"; };
-		F861D808207FA4200085E80D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F861D813207FA4520085E80D /* greeting */ = {isa = PBXFileReference; lastKnownFileType = folder; name = greeting; path = ../greeting; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,7 +88,6 @@
 				F861D813207FA4520085E80D /* greeting */,
 				F861D7DF207FA40F0085E80D /* iosApp */,
 				F861D7F4207FA4100085E80D /* iosAppTests */,
-				F861D806207FA4200085E80D /* greeting */,
 				F861D7DE207FA40F0085E80D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -125,15 +122,6 @@
 				F861D7F7207FA4100085E80D /* Info.plist */,
 			);
 			path = iosAppTests;
-			sourceTree = "<group>";
-		};
-		F861D806207FA4200085E80D /* greeting */ = {
-			isa = PBXGroup;
-			children = (
-				F861D807207FA4200085E80D /* greeting.h */,
-				F861D808207FA4200085E80D /* Info.plist */,
-			);
-			path = greeting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,7 +440,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-v";
-				PRODUCT_BUNDLE_IDENTIFIER = guru.stefma.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jetbrains.iosApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -473,7 +461,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-v";
-				PRODUCT_BUNDLE_IDENTIFIER = guru.stefma.iosApp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jetbrains.iosApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -493,7 +481,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = guru.stefma.iosAppTests;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jetbrains.iosAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -513,7 +501,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = guru.stefma.iosAppTests;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jetbrains.iosAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -532,7 +520,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = greeting/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				KOTLIN_BUILD_TYPE = DEBUG;
 				KOTLIN_TARGET = "";
@@ -543,7 +530,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = guru.stefma.greeting;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jetbrains.greeting;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -564,7 +551,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = greeting/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				KOTLIN_BUILD_TYPE = RELEASE;
 				KOTLIN_TARGET = "";
@@ -575,7 +561,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = guru.stefma.greeting;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jetbrains.greeting;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
