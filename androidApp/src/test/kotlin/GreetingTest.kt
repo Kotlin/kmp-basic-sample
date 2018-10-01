@@ -15,5 +15,5 @@ class GreetingTest {
     }
 }
 
-// Note that common tests for calculator (i.e. `CalculatorTest`) can be run from `greeting/android`
+// Note that common tests for calculator (i.e. `CalculatorTest`) can be run from `greeting`
 // with `test` Gradle task.
