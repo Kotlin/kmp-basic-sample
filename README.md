@@ -9,10 +9,16 @@ If you have questions about the structure or how it works take a look at the doc
 To compile the project from Xcode just open `iosApp/iosApp.xcodeproj` and run the application.
 The [swift tests](iosApp/iosAppTests/iosAppTests.swift) also can be executed from Xcode.
 
-To compile a framework from the command line execute:
+To compile a framework for ios simulator from the command line execute:
 
 ```
   > ./gradlew :greeting:build
+```
+
+To compile the framework for a device use the `device` project property:
+
+```
+  > ./gradlew :greeting:build -Pdevice=true
 ```
 
 To run kotlin tests (including the [common ones](greeting/src/commonTest/kotlin/CalculatorTest.kt))

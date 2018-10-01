@@ -38,10 +38,10 @@ dependencies {
 kotlin {
     targets {
         fromPreset(presets.android, 'androidLib')
-        fromPreset(presets.iosArm64, 'ios')
-        fromPreset(presets.iosX64, 'iosSim')
 
-        configure([ios, iosSim]) {
+        def buildForDevice = project.findProperty("device")?.toBoolean() ?: false
+        def iosPreset = (buildForDevice) ? presets.iosArm64 : presets.iosX64
+        fromPreset(iosPreset, 'ios') {
             compilations.main.outputKinds('FRAMEWORK')
         }
     }
@@ -58,18 +58,15 @@ kotlin {
                 implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
             }
         }
-        iosSimMain.dependsOn iosMain
-        iosSimTest.dependsOn iosTest
     }
 }
 
 task copyFramework {
     def buildType = project.findProperty("kotlin.build.type") ?: "DEBUG"
-    def target = project.findProperty("kotlin.target") ?: "ios"
-    dependsOn "link${buildType.toLowerCase().capitalize()}Framework${target.capitalize()}"
+    dependsOn "link${buildType.toLowerCase().capitalize()}FrameworkIos"
 
     doLast {
-        def srcFile = kotlin.targets."$target".compilations.main.getBinary("FRAMEWORK", buildType)
+        def srcFile = kotlin.targets.ios.compilations.main.getBinary("FRAMEWORK", buildType)
         def targetDir = getProperty("configuration.build.dir")
         copy {
             from srcFile.parent
@@ -80,14 +77,14 @@ task copyFramework {
     }
 }
 
-task iosSimTest {
+task iosTest {
     def device = project.findProperty("iosDevice")?.toString() ?: "iPhone 8"
-    dependsOn 'linkTestDebugExecutableIosSim'
+    dependsOn 'linkTestDebugExecutableIos'
     group = JavaBasePlugin.VERIFICATION_GROUP
-    description = "Runs tests for target 'iosSim' on an iOS simulator"
+    description = "Runs tests for target 'ios' on an iOS simulator"
 
     doLast {
-        def binary = kotlin.targets.iosSim.compilations.test.getBinary('EXECUTABLE', 'DEBUG')
+        def binary = kotlin.targets.ios.compilations.test.getBinary('EXECUTABLE', 'DEBUG')
         exec {
             commandLine 'xcrun', 'simctl', 'spawn', device, binary.absolutePath
         }
