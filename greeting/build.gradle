@@ -80,3 +80,17 @@ task copyFramework {
         }
     }
 }
+
+task iosSimTest {
+    def device = project.findProperty("iosDevice")?.toString() ?: "iPhone 8"
+    dependsOn 'linkTestDebugExecutableIosSim'
+    group = JavaBasePlugin.VERIFICATION_GROUP
+    description = "Runs tests for target 'iosSim' on an iOS simulator"
+
+    doLast {
+        def binary = kotlin.targets.iosSim.compilations.test.getBinary('EXECUTABLE', 'DEBUG')
+        exec {
+            commandLine 'xcrun', 'simctl', 'spawn', device, binary.absolutePath
+        }
+    }
+}
