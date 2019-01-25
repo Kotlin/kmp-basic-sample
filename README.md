@@ -31,7 +31,7 @@ on an iOS simulator execute:
 By default the `iPhone 8` simulator is used. One can change this setting using the `iosDevice` project property:
 
 ```
-  > ./gradlew :greeting:iosSimTest -PiosDevice='iPhone 7'
+  > ./gradlew :greeting:iosTest -PiosDevice='iPhone 7'
 ```
 
 
