@@ -42,7 +42,14 @@ kotlin {
         def buildForDevice = project.findProperty("device")?.toBoolean() ?: false
         def iosPreset = (buildForDevice) ? presets.iosArm64 : presets.iosX64
         fromPreset(iosPreset, 'ios') {
-            compilations.main.outputKinds('FRAMEWORK')
+            binaries {
+                framework {
+                    // Disable bitcode embedding for the simulator build.
+                    if (!buildForDevice) {
+                        embedBitcode("disable")
+                    }
+                }
+            }
         }
     }
 
