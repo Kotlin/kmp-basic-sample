@@ -73,7 +73,7 @@ task copyFramework {
     dependsOn "link${buildType.toLowerCase().capitalize()}FrameworkIos"
 
     doLast {
-        def srcFile = kotlin.targets.ios.compilations.main.getBinary("FRAMEWORK", buildType)
+        def srcFile = kotlin.targets.ios.binaries.getFramework(buildType).outputFile
         def targetDir = getProperty("configuration.build.dir")
         copy {
             from srcFile.parent
@@ -91,7 +91,7 @@ task iosTest {
     description = "Runs tests for target 'ios' on an iOS simulator"
 
     doLast {
-        def binary = kotlin.targets.ios.compilations.test.getBinary('EXECUTABLE', 'DEBUG')
+        def binary = kotlin.targets.ios.binaries.getExecutable('test', 'DEBUG').outputFile
         exec {
             commandLine 'xcrun', 'simctl', 'spawn', device, binary.absolutePath
         }
