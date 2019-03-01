@@ -25,7 +25,7 @@ To run kotlin tests (including the [common ones](greeting/src/commonTest/kotlin/
 on an iOS simulator execute:
 
 ```
-  > ./gradlew :greeting:iosSimTest
+  > ./gradlew :greeting:iosTest
 ```
 
 By default the `iPhone 8` simulator is used. One can change this setting using the `iosDevice` project property:
