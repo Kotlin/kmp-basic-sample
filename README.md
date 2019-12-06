@@ -1,7 +1,7 @@
 # Multiplatform sample
 This example shows how to use Kotlin/Native in the multiplatform world.
 
-This sample based on the [multiplatform documentation](https://github.com/h0tk3y/k-new-mpp-samples/blob/master/README.md).
+This sample based on the [multiplatform documentation](http://kotlinlang.org/docs/reference/building-mpp-with-gradle.html).
 If you have questions about the structure or how it works take a look at the documentation there.
 
 ## iOS
