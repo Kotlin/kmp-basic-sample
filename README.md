@@ -1,5 +1,7 @@
 # Multiplatform sample
-This example shows how to use Kotlin/Native in the multiplatform world.
+This example shows you how to use Kotlin Multiplatform in an monorepo.
+The MPP code can be found inside the [greeting/](greeting/) directory while
+the "UI" implementations can be found inside the [androidApp/](androidApp/) resp. [iosApp/](iosApp/) dir.
 
 This sample based on the [multiplatform documentation](http://kotlinlang.org/docs/reference/building-mpp-with-gradle.html).
 If you have questions about the structure or how it works take a look at the documentation there.
