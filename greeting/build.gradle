@@ -36,35 +36,31 @@ dependencies {
 }
 
 kotlin {
-    targets {
-        fromPreset(presets.android, 'androidLib')
+   android('androidLib')
+   
+   def buildForDevice = project.findProperty("device")?.toBoolean() ?: false
+   def iosTarget = (buildForDevice) ? iosArm64('ios') : iosX64('ios')
+   iosTarget.binaries {
+      framework {
+         // Disable bitcode embedding for the simulator build.
+         if (!buildForDevice) {
+            embedBitcode("disable")
+         }
+      }
+   }
 
-        def buildForDevice = project.findProperty("device")?.toBoolean() ?: false
-        def iosPreset = (buildForDevice) ? presets.iosArm64 : presets.iosX64
-        fromPreset(iosPreset, 'ios') {
-            binaries {
-                framework {
-                    // Disable bitcode embedding for the simulator build.
-                    if (!buildForDevice) {
-                        embedBitcode("disable")
-                    }
-                }
-            }
-        }
-    }
-
-    sourceSets {
-        commonMain {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
-            }
-        }
-        commonTest {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-test-common'
-                implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
-            }
-        }
+   sourceSets {
+      commonMain {
+         dependencies {
+            implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
+         }
+      }
+      commonTest {
+         dependencies {
+            implementation 'org.jetbrains.kotlin:kotlin-test-common'
+            implementation 'org.jetbrains.kotlin:kotlin-test-annotations-common'
+         }
+      }
     }
 }
 
