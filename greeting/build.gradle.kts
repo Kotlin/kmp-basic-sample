@@ -68,7 +68,7 @@ tasks.register("copyFramework") {
     dependsOn("link${buildType.toLowerCase().capitalize()}FrameworkIos")
 
     doLast {
-        val srcFile = (kotlin.targets.named("ios") as KotlinNativeTarget).binaries.getFramework(buildType).outputFile
+        val srcFile = (kotlin.targets["ios"] as KotlinNativeTarget).binaries.getFramework(buildType).outputFile
         val targetDir = project.property("configuration.build.dir")!!
         copy {
             from(srcFile.parent)
@@ -86,7 +86,7 @@ tasks.register("iosTest")  {
     description = "Runs tests for target 'ios' on an iOS simulator"
 
     doLast {
-        val  binary = (kotlin.targets.named("ios") as KotlinNativeTarget).binaries.getTest("DEBUG").outputFile
+        val  binary = (kotlin.targets["ios"] as KotlinNativeTarget).binaries.getTest("DEBUG").outputFile
         exec {
             commandLine("xcrun", "simctl", "spawn", "--standalone", device, binary.absolutePath)
         }
