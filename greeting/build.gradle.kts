@@ -79,16 +79,17 @@ tasks.register("copyFramework") {
     }
 }
 
-tasks.register("iosTest")  {
-    val  device = project.findProperty("iosDevice") as? String ?: "iPhone 8"
-    dependsOn("linkDebugTestIos")
-    group = JavaBasePlugin.VERIFICATION_GROUP
-    description = "Runs tests for target 'ios' on an iOS simulator"
-
-    doLast {
-        val  binary = (kotlin.targets["ios"] as KotlinNativeTarget).binaries.getTest("DEBUG").outputFile
-        exec {
-            commandLine("xcrun", "simctl", "spawn", "--standalone", device, binary.absolutePath)
-        }
-    }
-}
+// this is commented out as there is a gradle plugin bug that prevents us from building : https://youtrack.jetbrains.com/issue/KT-35560
+//tasks.register("iosTest")  {
+//    val  device = project.findProperty("iosDevice") as? String ?: "iPhone 8"
+//    dependsOn("linkDebugTestIos")
+//    group = JavaBasePlugin.VERIFICATION_GROUP
+//    description = "Runs tests for target 'ios' on an iOS simulator"
+//
+//    doLast {
+//        val  binary = (kotlin.targets["ios"] as KotlinNativeTarget).binaries.getTest("DEBUG").outputFile
+//        exec {
+//            commandLine("xcrun", "simctl", "spawn", "--standalone", device, binary.absolutePath)
+//        }
+//    }
+//}
