@@ -1,47 +1,22 @@
-# Multiplatform sample
-This example shows you how to use Kotlin Multiplatform in an monorepo.
-The MPP code can be found inside the [greeting/](greeting/) directory while
-the "UI" implementations can be found inside the [androidApp/](androidApp/) resp. [iosApp/](iosApp/) dir.
+# Kotlin Multiplatform Mobile Sample
 
-This sample based on the [multiplatform documentation](http://kotlinlang.org/docs/reference/building-mpp-with-gradle.html).
-If you have questions about the structure or how it works take a look at the documentation there.
+This is a **Kotlin Multiplatform Mobile (KMM) Project**. It includes iOS and Android applications with a native UI and a module with code shared on iOS and Android.
 
-## iOS
+## Features
 
-To compile the project from Xcode just open `iosApp/iosApp.xcodeproj` and run the application.
-The [swift tests](iosApp/iosAppTests/iosAppTests.swift) also can be executed from Xcode.
+This sample demonstrates basic KMM features:
+* Using platform-specific APIs with the expect/actual mechanism (see `Platform.kt`)
+* Tests for Shared Module (see `CalculatorTest.kt`, `iosTest.kt`, `androidTest.kt`)
 
-To compile a framework for ios simulator from the command line execute:
+## How to use
 
-```
-  > ./gradlew :greeting:build
-```
+With the [KMM plugin for Android Studio](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) you can run, test, and debug shared code on both platforms without switching IDEs. Run and debug the application by selecting the corresponding configuration in the **Run configuration** menu. Run and debug shared module tests by pressing the gutter icon on a test class or method.
 
-To compile the framework for a device use the `device` project property:
+## Related links
 
-```
-  > ./gradlew :greeting:build -Pdevice=true
-```
-
-To run kotlin tests (including the [common ones](greeting/src/commonTest/kotlin/CalculatorTest.kt))
-on an iOS simulator execute:
-
-```
-  > ./gradlew :greeting:iosTest
-```
-
-By default the `iPhone 8` simulator is used. One can change this setting using the `iosDevice` project property:
-
-```
-  > ./gradlew :greeting:iosTest -PiosDevice='iPhone 7'
-```
+* Visit [Kotlin Multiplatform Mobile Developer Portal](https://kotlinlang.org/lp/mobile/) to learn more about the technology
+* Check out the [Networking and data storage with KMM hands-on](https://play.kotlinlang.org/hands-on/Networking%20and%20data%20storage%20with%20Kotlin%20Multiplatform%20Mobile/01_introduction) lab to learn how to create a mobile application for Android and iOS with a shared codebase with Ktor and SQLDelight.
 
 
-## Android
 
-The application can be built and executed on a device or emulator using Android Studio 3.2 or higher.
-One can also compile the application and run tests from the command line:
 
-```
-   > ./gradlew :androidApp:build
-```
