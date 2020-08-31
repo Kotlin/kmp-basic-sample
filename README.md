@@ -15,7 +15,7 @@ With the [KMM plugin for Android Studio](https://plugins.jetbrains.com/plugin/14
 ## Related links
 
 * Visit [Kotlin Multiplatform Mobile Developer Portal](https://kotlinlang.org/lp/mobile/) to learn more about the technology
-* Check out the [Networking and data storage with KMM hands-on](https://play.kotlinlang.org/hands-on/Networking%20and%20data%20storage%20with%20Kotlin%20Multiplatform%20Mobile/01_introduction) lab to learn how to create a mobile application for Android and iOS with a shared codebase with Ktor and SQLDelight.
+* Check out the [Networking and data storage with KMM hands-on](https://play.kotlinlang.org/hands-on/Networking%20and%20Data%20Storage%20with%20Kotlin%20Multiplatfrom%20Mobile/) lab to learn how to create a mobile application for Android and iOS with a shared codebase with Ktor and SQLDelight.
 
 
 
