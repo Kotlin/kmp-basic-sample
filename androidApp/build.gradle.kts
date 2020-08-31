@@ -1,37 +1,35 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.multiplatform")
+    kotlin("android")
+    id("kotlin-android-extensions")
 }
+group = "com.jetbrains"
+version = "1.0-SNAPSHOT"
 
+repositories {
+    gradlePluginPortal()
+    google()
+    jcenter()
+    mavenCentral()
+}
+dependencies {
+    implementation(project(":shared"))
+    implementation("com.google.android.material:material:1.2.0")
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
+}
 android {
     compileSdkVersion(29)
     defaultConfig {
-        applicationId = "org.konan.multiplatform"
-        minSdkVersion(15)
+        applicationId = "com.jetbrains.androidApp"
+        minSdkVersion(24)
         targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            isMinifyEnabled = false
         }
     }
-    packagingOptions {
-        exclude("META-INF/main.kotlin_module")
-    }
-}
-
-kotlin {
-    android()
-}
-
-dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation(project(":greeting"))
-
-    implementation("androidx.appcompat:appcompat:1.1.0")
-
-    testImplementation("junit:junit:4.12")
 }
