@@ -1,0 +1,28 @@
+name: Android build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  android_build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '15'
+
+    - name: gradlew
+      run: bash ./gradlew clean lintDebug build test --stacktrace
+
+    - uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: apk_aar
+        path: |
+          **/*.apk
+          **/*.aar
