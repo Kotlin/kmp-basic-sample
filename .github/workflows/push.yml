@@ -7,5 +7,10 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Setup Java JDK
+      uses: actions/setup-java@v2.1.0
+      with:
+       distribution: 'adopt'
+       java-version: '11'
     - name: Build the project
       run: ./gradlew assemble
