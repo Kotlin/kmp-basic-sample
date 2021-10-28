@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
@@ -8,19 +7,15 @@ plugins {
 kotlin {
     android()
 
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
-            ::iosArm64
-        else
-            ::iosX64
-
-    iosTarget("ios") {
+    ios {
         binaries {
             framework {
                 baseName = "shared"
             }
         }
     }
+    iosSimulatorArm64()
+
     sourceSets {
         val commonMain by getting
         val commonTest by getting {
@@ -37,7 +32,12 @@ kotlin {
             }
         }
         val iosMain by getting
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
+        }
         val iosTest by getting
+        val iosSimulatorArm64Test by getting
+        iosSimulatorArm64Test.dependsOn(iosTest)
     }
 }
 
