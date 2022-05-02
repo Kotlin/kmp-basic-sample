@@ -1,7 +1,10 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("native.cocoapods")
     id("com.android.library")
 }
+
+version = "1.0"
 
 kotlin {
     android()
@@ -14,6 +17,13 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
         }
+    }
+
+    cocoapods {
+        summary = "Kotlin/Native shared module"
+        homepage = "https://github.com/Kotlin/kmm-basic-sample/"
+        ios.deploymentTarget = "13.2"
+        podfile = project.file("../iosApp/Podfile")
     }
 
     sourceSets {
