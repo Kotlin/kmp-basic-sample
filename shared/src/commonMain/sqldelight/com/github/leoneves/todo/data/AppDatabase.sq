@@ -1,0 +1,53 @@
+CREATE TABLE User (
+    id INTEGER PRIMARY KEY NOT NULL,
+    firstName TEXT NOT NULL,
+    email TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    lastName TEXT NOT NULL,
+    maidenName TEXT NOT NULL
+);
+
+CREATE TABLE Todo (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    todo TEXT NOT NULL,
+    completed INTEGER AS Boolean NOT NULL DEFAULT FALSE,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User (id)
+);
+
+removeAllUser:
+DELETE FROM User;
+
+removeAllTodos:
+DELETE FROM Todo;
+
+selectAllUsersByName:
+SELECT * FROM User
+WHERE firstName LIKE ('% ' || :name)
+OR email LIKE ('% ' || :name)
+OR lastName LIKE ('% ' || :name)
+OR maidenName LIKE ('% ' || :name);
+
+findTodosByUserId:
+SELECT * FROM Todo
+WHERE user_id = ?;
+
+findUserById:
+SELECT * FROM User
+WHERE id = ?;
+
+findAllUsers:
+SELECT * FROM User;
+
+deleteTodoById:
+DELETE FROM Todo
+WHERE id = ?;
+
+updateTodo:
+UPDATE Todo
+SET todo = ?, completed = ?, user_id = ?
+WHERE id = ?;
+
+insertTodo:
+INSERT INTO Todo (todo, completed, user_id)
+VALUES (?, ?, ?);
