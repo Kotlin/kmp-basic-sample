@@ -6,7 +6,14 @@ pluginManagement {
     }
 }
 
-rootProject.name = "KmmSample"
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "KmmToDoList"
 
 include(":androidApp")
 include(":shared")
