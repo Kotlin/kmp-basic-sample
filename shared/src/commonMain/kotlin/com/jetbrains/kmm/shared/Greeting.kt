@@ -4,4 +4,8 @@ class Greeting {
     fun greeting(): String {
         return "Hello, ${Platform().platform}!"
     }
+
+    fun sayHello():String{
+        return "Hello ${Platform().newVal}"
+    }
 }
