@@ -4,9 +4,7 @@ plugins {
 }
 
 kotlin {
-    targetHierarchy.default()
-
-    android() {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
@@ -25,7 +23,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonTest by getting {
+        commonTest {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
