@@ -1,50 +1,78 @@
 package com.jetbrains.kmm.androidApp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.EditText
-import com.jetbrains.kmm.shared.Greeting
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import com.jetbrains.kmm.shared.Calculator
-import android.widget.TextView
-import com.jetbrains.androidApp.R
+import com.jetbrains.kmm.shared.Greeting
 
 fun greet(): String {
     return Greeting().greeting()
 }
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContent {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                ) {
+                    Text(greet(), Modifier.padding(8.dp))
 
-        val tv: TextView = findViewById(R.id.textView)
-        tv.text = greet()
+                    var firstNumber by rememberSaveable { mutableStateOf("") }
+                    var secondNumber by rememberSaveable { mutableStateOf("") }
 
-        val numATV: EditText = findViewById(R.id.editTextNumberDecimalA)
-        val numBTV: EditText = findViewById(R.id.editTextNumberDecimalB)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        TextField(
+                            value = firstNumber,
+                            onValueChange = { firstNumber = it },
+                            modifier = Modifier.width(100.dp),
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        )
+                        Text(text = "+", modifier = Modifier.padding(4.dp))
+                        TextField(
+                            value = secondNumber,
+                            onValueChange = { secondNumber = it },
+                            modifier = Modifier.width(100.dp),
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        )
 
-        val sumTV: TextView = findViewById(R.id.textViewSum)
-
-        val textWatcher = object: TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                try {
-                    val numA = Integer.parseInt(numATV.text.toString())
-                    val numB = Integer.parseInt(numBTV.text.toString())
-                    sumTV.text =  "= " + Calculator.sum(numA, numB).toString()
-                } catch(e: NumberFormatException) {
-                    sumTV.text = "= 🤔"
+                        val first = firstNumber.toIntOrNull()
+                        val second = secondNumber.toIntOrNull()
+                        Text(
+                            text = if (first != null && second != null) {
+                                "= ${Calculator.sum(first, second)}"
+                            } else {
+                                "= \uD83E\uDD14"
+                            },
+                            modifier = Modifier
+                                .width(100.dp)
+                                .padding(4.dp)
+                        )
+                    }
                 }
             }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         }
-
-        numATV.addTextChangedListener(textWatcher)
-        numBTV.addTextChangedListener(textWatcher)
-
     }
 }
