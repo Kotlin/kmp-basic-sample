@@ -1,5 +1,5 @@
+import Shared
 import SwiftUI
-import shared
 
 struct ContentView: View {
     let calculator = Calculator.Companion()
