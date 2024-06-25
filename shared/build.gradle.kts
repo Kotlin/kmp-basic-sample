@@ -30,12 +30,10 @@ kotlin {
             // put your Multiplatform dependencies here
         }
         commonTest.dependencies {
-            implementation(kotlin("test-common"))
-            implementation(kotlin("test-annotations-common"))
+            implementation(kotlin("test"))
         }
         val androidUnitTest by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
                 implementation(libs.junit)
             }
         }
@@ -52,7 +50,4 @@ android {
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
-}
-dependencies {
-    implementation(kotlin("script-runtime"))
 }
